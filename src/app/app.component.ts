@@ -52,9 +52,7 @@ const getRandomInt = (min: number, max: number) => {
 })
 export class AppComponent implements OnInit {
   APP_VERSION = pkg.version;
-
   inputTypes = InputTypes;
-
   theme = 'dark';
   chartType: string;
   chartGroups: any[];
@@ -74,7 +72,6 @@ export class AppComponent implements OnInit {
   bubble: any;
   linearScale: boolean = false;
   range: boolean = false;
-
   view: [number, number];
   width: number = 700;
   height: number = 300;

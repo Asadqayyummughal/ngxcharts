@@ -63,16 +63,13 @@ export class ComboSeriesVerticalComponent implements OnChanges {
   @Input() seriesName: string;
   @Input() animations: boolean = true;
   @Input() noBarWhenZero: boolean = true;
-
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
   @Output() bandwidth = new EventEmitter();
-
   bars: any;
   x: any;
   y: any;
-
   placementTypes = PlacementTypes;
   barOrientation = BarOrientation;
   styleTypes = StyleTypes;
@@ -87,19 +84,16 @@ export class ComboSeriesVerticalComponent implements OnChanges {
       width = this.xScale.bandwidth();
       this.bandwidth.emit(width);
     }
-
     let d0 = 0;
     let total;
     if (this.type === 'normalized') {
       total = this.series.map(d => d.value).reduce((sum, d) => sum + d, 0);
     }
-
     this.bars = this.series.map((d, index) => {
       let value = d.value;
       const label = d.name;
       const formattedLabel = formatLabel(label);
       const roundEdges = this.type === 'standard';
-
       const bar: any = {
         value,
         label,
@@ -111,21 +105,18 @@ export class ComboSeriesVerticalComponent implements OnChanges {
         x: 0,
         y: 0
       };
-
       if (this.type === 'standard') {
         bar.height = Math.abs(this.yScale(value) - this.yScale(0));
         bar.x = this.xScale(label);
-
         if (value < 0) {
           bar.y = this.yScale(0);
         } else {
           bar.y = this.yScale(value);
         }
       } else if (this.type === 'stacked') {
-        const offset0 = d0;
-        const offset1 = offset0 + value;
+        const offset0= d0;
+        const offset1= offset0 + value;
         d0 += value;
-
         bar.height = this.yScale(offset0) - this.yScale(offset1);
         bar.x = 0;
         bar.y = this.yScale(offset1);
